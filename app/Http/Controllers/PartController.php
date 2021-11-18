@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class PartController extends Controller
 {
-    public function index(){
-        return view('backend.part.index');
+    public function index()
+    {
+        $parts = Part::all();
+        return view('backend.part.index')
+            ->with('parts', $parts);
     }
 
     public function create()
@@ -19,31 +22,32 @@ class PartController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'name'=>'required',
-        'price'=>'required',
-        'weight'=>'required',
-        'stock'=>'required',
-        'description'=>'required',
-        'images'=>'required',
-        'category'=>'required',
-        'brand'=>'required',
+            'name' => 'required',
+            'price' => 'required',
+            'weight' => 'required',
+            'stock' => 'required',
+            'description' => 'required',
+            'images' => 'required',
+            'category' => 'required',
+            'brand' => 'required',
         ]);
 
         Part::create([
-        'name'=>$request->name,
-        'price'=>$request->price,
-        'weight'=>$request->weight,
-        'stock'=>$request->stock,
-        'description'=>$request->description,
-        'images'=>$request->image,
-        'category'=>$request->category,
-        'brand'=>$request->brand,
+            'name' => $request->name,
+            'price' => $request->price,
+            'weight' => $request->weight,
+            'stock' => $request->stock,
+            'description' => $request->description,
+            'images' => $request->image,
+            'category' => $request->category,
+            'brand' => $request->brand,
         ]);
 
         return redirect()->route('products')->with('success', 'Part berhasil disimpan');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $parts = Part::findOrFail($id);
 
         return view('backend.part.edit', [
@@ -51,35 +55,37 @@ class PartController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
-            'name'=>'required',
-            'price'=>'required',
-            'weight'=>'required',
-            'stock'=>'required',
-            'description'=>'required',
-            'images'=>'required',
-            'category'=>'required',
-            'brand'=>'required',
+            'name' => 'required',
+            'price' => 'required',
+            'weight' => 'required',
+            'stock' => 'required',
+            'description' => 'required',
+            'images' => 'required',
+            'category' => 'required',
+            'brand' => 'required',
         ]);
 
         $parts = Part::findOrFail($id);
 
         $parts->update([
-        'name'=>$request->name,
-        'price'=>$request->price,
-        'weight'=>$request->weight,
-        'stock'=>$request->stock,
-        'description'=>$request->description,
-        'images'=>$request->image,
-        'category'=>$request->category,
-        'brand'=>$request->brand,
+            'name' => $request->name,
+            'price' => $request->price,
+            'weight' => $request->weight,
+            'stock' => $request->stock,
+            'description' => $request->description,
+            'images' => $request->image,
+            'category' => $request->category,
+            'brand' => $request->brand,
         ]);
 
         return redirect()->route('parts')->with('success', 'Part berhasil diubah');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         return redirect()->route('parts')->with('success', 'Part berhasil dihapus');
     }
 }

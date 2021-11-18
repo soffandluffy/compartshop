@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::prefix('part')->group(function () {
+            Route::get('/', [PartController::class, 'index'])->name('part.index');
+        });
+    });
+});
 
 Route::get('/', function () {
     return view('welcome');

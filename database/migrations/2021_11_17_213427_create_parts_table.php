@@ -25,7 +25,6 @@ class CreatePartsTable extends Migration
             $table->string('category')->nullable();
             $table->string('brand')->nullable();
 
-
             $table->timestamps();
         });
     }

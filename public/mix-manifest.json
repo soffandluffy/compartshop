@@ -1,4 +1,7 @@
 {
+    "/js/mdb.min.js": "/js/mdb.min.js",
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/css/mdb.dark.min.css": "/css/mdb.dark.min.css",
+    "/css/mdb.min.css": "/css/mdb.min.css"
 }
