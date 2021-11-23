@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Part;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
 class PartController extends Controller
@@ -12,6 +13,13 @@ class PartController extends Controller
         $parts = Part::all();
         return view('backend.part.index')
             ->with('parts', $parts);
+    }
+
+    public function detail($id)
+    {
+        $part = Part::findOrFail($id);
+        return view('frontend.partdetail')
+            ->with('part', $part);
     }
 
     public function create()
@@ -32,26 +40,33 @@ class PartController extends Controller
             'brand' => 'required',
         ]);
 
+        $files = [];
+        foreach ($request->file('images') as $image) {
+            $imageName = time() . rand(1, 100) . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/parts'), $imageName);
+            $files[] = $imageName;
+        }
+
         Part::create([
             'name' => $request->name,
             'price' => $request->price,
             'weight' => $request->weight,
             'stock' => $request->stock,
             'description' => $request->description,
-            'images' => $request->image,
+            'images' => $files,
             'category' => $request->category,
             'brand' => $request->brand,
         ]);
 
-        return redirect()->route('products')->with('success', 'Part berhasil disimpan');
+        return redirect()->route('part.index')->with('success', 'Part berhasil disimpan');
     }
 
     public function edit($id)
     {
-        $parts = Part::findOrFail($id);
+        $part = Part::findOrFail($id);
 
         return view('backend.part.edit', [
-            'parts' => $parts,
+            'part' => $part,
         ]);
     }
 
@@ -70,22 +85,51 @@ class PartController extends Controller
 
         $parts = Part::findOrFail($id);
 
+        $files = [];
+        if ($request->hasFile('images')) {
+
+            foreach ($parts->images as $key => $value) {
+                $imagePath = 'images/parts/' . $value;
+                if ($value != 'code1.png') {
+                    if (File::exists($imagePath)) {
+                        File::delete($imagePath);
+                    }
+                }
+            }
+
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . rand(1, 100) . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images/parts'), $imageName);
+                $files[] = $imageName;
+            }
+        } else {
+            $files = $parts->images;
+        }
+
         $parts->update([
             'name' => $request->name,
             'price' => $request->price,
             'weight' => $request->weight,
             'stock' => $request->stock,
             'description' => $request->description,
-            'images' => $request->image,
+            'images' => $files,
             'category' => $request->category,
             'brand' => $request->brand,
         ]);
 
-        return redirect()->route('parts')->with('success', 'Part berhasil diubah');
+        return redirect()->route('part.index')->with('success', 'Part berhasil diubah');
     }
 
     public function delete($id)
     {
-        return redirect()->route('parts')->with('success', 'Part berhasil dihapus');
+        $part = Part::findOrFail($id);
+        foreach ($part->images as $value) {
+            $imagePath = 'images/parts/' . $value;
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+        }
+        $part->delete();
+        return redirect()->route('part.index')->with('success', 'Part berhasil dihapus');
     }
 }

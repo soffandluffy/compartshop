@@ -18,11 +18,12 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('subtotal');
             $table->string('no_resi')->nullable();
-            $table->string('status_order_id');
+            $table->string('status_order');
             $table->string('payment_method')->nullable();
             $table->integer('shipping_price');
             $table->string('courier');
             $table->text('address')->nullable();
+            $table->text('phonenumber')->nullable();
             $table->text('message')->nullable();
             $table->string('payment_proof')->nullable();
             $table->timestamps();

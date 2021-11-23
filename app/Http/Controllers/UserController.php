@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index(){
-        return view('backend.user.index');
+    public function index()
+    {
+        $users = User::all();
+        return view('backend.user.index')
+            ->with('users', $users);
     }
 
     public function create()
@@ -19,21 +22,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=> 'required',
-            'email'=> 'required',
-            'password'=> 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
         User::create([
-            'name'=> $request -> name ,
-            'email'=> $request -> email,
-            'password'=> $request -> password,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
         ]);
 
         return redirect()->route('users')->with('success', 'User berhasil disimpan');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $users = User::findOrFail($id);
 
         return view('backend.user.edit', [
@@ -41,25 +45,29 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
-            'name'=> 'required',
-            'email'=> 'required',
-            'password'=> 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
         $users = User::findOrFail($id);
 
         $users->update([
-            'name'=> $request -> name ,
-            'email'=> $request -> email,
-            'password'=> $request -> password,
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
         ]);
 
         return redirect()->route('users')->with('success', 'User berhasil diubah');
     }
 
-    public function delete($id){
-        return redirect()->route('users')->with('success', 'User berhasil dihapus');
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('user.index')->with('success', 'User berhasil dihapus');
     }
 }

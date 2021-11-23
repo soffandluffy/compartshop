@@ -47,7 +47,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="#">
+                    <a class="menu-link" href="{{ route('part.index') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotone/Design/Difference.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -62,7 +62,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="#">
+                    <a class="menu-link" href="{{ route('order.index') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotone/Design/Layers.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="#">
+                    <a class="menu-link" href="{{ route('user.index') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotone/Design/Layers.svg-->
                             <span class="svg-icon svg-icon-2">

@@ -21,7 +21,7 @@
         <!--end::Aside mobile toggle-->
         <!--begin::Mobile logo-->
         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-            <a href="../../demo1/dist/index.html" class="d-lg-none">
+            <a href="{{ route('dashboard') }}" class="d-lg-none">
                 <img alt="Logo" src="assets/media/logos/logo-3.svg" class="h-30px" />
             </a>
         </div>
@@ -35,7 +35,7 @@
                     <!--begin::Menu-->
                     <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
                         <div class="menu-item me-lg-1">
-                            <a class="menu-link active py-3" href="../../demo1/dist/index.html">
+                            <a class="menu-link active py-3" href="{{ route('dashboard') }}">
                                 <span class="menu-title">Dashboard</span>
                             </a>
                         </div>
@@ -53,7 +53,7 @@
                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                         <!--begin::Menu wrapper-->
                         <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
-                            <img src="assets/media/avatars/150-26.jpg" alt="metronic" />
+                            <img src="{{ asset('images/parts/code1.png') }}" alt="metronic" />
                         </div>
                         <!--begin::Menu-->
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -62,7 +62,7 @@
                                 <div class="menu-content d-flex align-items-center px-3">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-50px me-5">
-                                        <img alt="Logo" src="assets/media/avatars/150-26.jpg" />
+                                        <img alt="Logo" src="{{ asset('images/parts/code1.png') }}" />
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
@@ -80,12 +80,12 @@
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="../../demo1/dist/account/overview.html" class="menu-link px-5">My Profile</a>
+                                <a href="#" class="menu-link px-5">My Profile</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="../../demo1/dist/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign Out</a>
+                                <a href="#" class="menu-link px-5">Sign Out</a>
                             </div>
                             <!--end::Menu item-->
                         </div>

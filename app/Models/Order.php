@@ -17,11 +17,23 @@ class Order extends Model
         'user_id',
         'subtotal',
         'no_resi',
-        'status_order_id',
+        'status_order',
         'payment_method',
         'shipping_price',
         'courier',
         'address',
+        'phonenumber',
         'message',
-        'payment_proof' ];
+        'payment_proof'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function detail()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Part extends Model
 {
     use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,5 +22,26 @@ class Part extends Model
         'description',
         'images',
         'category',
-        'brand' ];
+        'brand'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'images' => 'array',
+    ];
+
+    /**
+     * Set the user's first name.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setImagesAttribute($value)
+    {
+        $this->attributes['images'] = json_encode($value);
+    }
 }
