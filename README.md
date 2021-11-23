@@ -28,6 +28,7 @@ Install all the dependencies using composer
 Copy the example env file and make the required configuration changes in the .env file
 
     cp .env.example .env (for linux/mac)
+    
     copy .env.example .env (for windows)
 
 Edit file .env change your database name, username, and password
