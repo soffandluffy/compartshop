@@ -112,8 +112,8 @@
                                                         </span>
                                                     </div>
                                                     <div class="d-flex flex-column">
-                                                        <a href="#" class="text-dark text-hover-primary fs-6 fw-bolder">{{ $cart->part->name }}</a>
-                                                        <span class="text-muted fw-bold">{{ $cart->part->price }}</span>
+                                                        <a href="#" class="text-dark text-hover-primary fs-6 fw-bolder">{{ $cart->part->name }} (x{{ $cart->qty }})</a>
+                                                        <span class="text-muted fw-bold">@currency($cart->part->price)</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,12 +163,12 @@
                                 <!--end::Menu separator-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-5">
-                                    <a href="#" class="menu-link px-5">My Profile</a>
+                                    <a href="{{ route('userOrders') }}" class="menu-link px-5">My Orders</a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-5">
-                                    <a href="#" class="menu-link px-5">Sign Out</a>
+                                    <a href="{{ route('logout') }}" class="menu-link px-5">Sign Out</a>
                                 </div>
                                 <!--end::Menu item-->
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Part;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -18,7 +19,9 @@ class PartController extends Controller
     public function detail($id)
     {
         $part = Part::findOrFail($id);
+        $carts = Cart::where('user_id', auth()->user()->id)->get();
         return view('frontend.partdetail')
+            ->with('carts', $carts)
             ->with('part', $part);
     }
 

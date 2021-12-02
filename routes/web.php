@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PartController;
 use App\Http\Controllers\UserController;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::prefix('orders')->group(function () {
             Route::get('/', [OrderController::class, 'index'])->name('order.index');
+            Route::post('delete/{id}', [OrderController::class, 'delete'])->name('order.delete');
+            Route::post('inputResi/{id}', [OrderController::class, 'inputResi'])->name('order.inputResi');
+            Route::post('confirmArrived/{id}', [OrderController::class, 'confirmArrived'])->name('order.confirmArrived');
         });
 
         Route::prefix('users')->group(function () {
@@ -43,12 +47,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
     });
 
+    Route::get('orders', [OrderController::class, 'userOrder'])->name('userOrders');
+
     Route::post('addToCart', [CartController::class, 'addToCart'])->name('addToCart');
     Route::post('removeFromCart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
     Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::post('submitOrder', [CartController::class, 'submitOrder'])->name('submitOrder');
     Route::get('orderconfirmed/{id}', [CartController::class, 'orderconfirmed'])->name('orderconfirmed');
 });
+
+Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('parts/detail/{id}', [PartController::class, 'detail'])->name('part.detail');

@@ -36,4 +36,15 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    // this is a recommended way to declare event handlers
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($order) { // before delete() method call this
+             $order->detail()->delete();
+             // do the rest of the cleanup...
+        });
+    }
+
 }
